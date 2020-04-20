@@ -1,7 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
-using OdeToFood.Core
-using System.Text;
+using OdeToFood.Core;
 
 namespace OdeToFood.Data
 {
@@ -11,22 +10,26 @@ namespace OdeToFood.Data
     }
     public class InMemoryRestaurantData: IRestaurantData
     {
-       readonly List<Restaurant> restaurants;
+        readonly List<Restaurant> restaurants;
         public InMemoryRestaurantData()
         {
             restaurants = new List<Restaurant>()
             {
-                new Restaurant { Id = 1, Name = "Scott's Pizza", Location = "Maryland", Cuisine=CuisineType.Italian},
+                new Restaurant { Id = "1", Name = "Scott's Pizza", Location = "Maryland", Cuisine=CuisineType.Italian},
             };
         }
-
-        public IEnumerable<Restaurant> GetAll()
+        //this hardcoded part needs to be fixed
+        public object GetAll()
+        {
             from r in restaurants
-          orderby r.Name
-           select r;
+            orderby r.Name
+            select r;
+        }
+
+        IEnumerable<Restaurant> IRestaurantData.GetAll()
+        {
+            throw new NotImplementedException();
+        }
     }
 }
 
-class Restaurant
-{
-}
