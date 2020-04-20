@@ -1,5 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
+using OdeToFood.Core
+using System.Text;
 
 namespace OdeToFood.Data
 {
@@ -9,20 +11,22 @@ namespace OdeToFood.Data
     }
     public class InMemoryRestaurantData: IRestaurantData
     {
-        List<Restaurant> restaurants;
+       readonly List<Restaurant> restaurants;
         public InMemoryRestaurantData()
         {
-            restaurants = new List<Restaurants>()
+            restaurants = new List<Restaurant>()
             {
-                new Restaurant { ID = 1, Name = "Scott's Pizza", Location = "Maryland", Cuisine=CuisineType.Italian},
-            }
+                new Restaurant { Id = 1, Name = "Scott's Pizza", Location = "Maryland", Cuisine=CuisineType.Italian},
+            };
         }
 
         public IEnumerable<Restaurant> GetAll()
-        {
-            return from r in restaurants
-                   orderby r.Name
-                   select r;
-        }
+            from r in restaurants
+          orderby r.Name
+           select r;
     }
+}
+
+class Restaurant
+{
 }
